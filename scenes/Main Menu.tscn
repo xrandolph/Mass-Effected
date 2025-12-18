@@ -1,0 +1,107 @@
+[gd_scene load_steps=5 format=3 uid="uid://yu5ifki44vrm"]
+
+[ext_resource type="Script" uid="uid://b370nl5or818n" path="res://scripts/main_menu.gd" id="1"]
+[ext_resource type="Texture2D" uid="uid://b4rsypa43rmc6" path="res://assets/Backgrounds/Space.png" id="2"]
+[ext_resource type="FontFile" uid="uid://cfcoltj5j404i" path="res://assets/Fonts/kenvector_future_thin.ttf" id="3"]
+[ext_resource type="AudioStream" uid="uid://buidkefwq0ar6" path="res://assets/Sounds/674419__gregorquendel__sci-fi-soundscape-drone-pad-harmonic-011-ii-designed-atmospheres.mp3" id="4"]
+
+[node name="Main Menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1")
+
+[node name="Background" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = -10.0
+offset_right = 425.0
+offset_bottom = 258.0
+texture = ExtResource("2")
+
+[node name="MenuContainer" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MenuBox" type="VBoxContainer" parent="MenuContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Game Title" type="Label" parent="MenuContainer/MenuBox"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3")
+theme_override_font_sizes/font_size = 48
+text = "Mass Effected"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="StartButton" type="Button" parent="MenuContainer/MenuBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 1, 1)
+theme_override_colors/font_hover_pressed_color = Color(0.984674, 1.73271e-06, 0.52449, 1)
+theme_override_fonts/font = ExtResource("3")
+theme_override_font_sizes/font_size = 48
+text = "Start Game"
+
+[node name="CreditsButton" type="Button" parent="MenuContainer/MenuBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 1, 1)
+theme_override_colors/font_hover_pressed_color = Color(0.870588, 0, 0.290196, 1)
+theme_override_fonts/font = ExtResource("3")
+theme_override_font_sizes/font_size = 48
+text = "Credits
+"
+
+[node name="QuitButton" type="Button" parent="MenuContainer/MenuBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 1, 1)
+theme_override_colors/font_hover_color = Color(0.673678, 1.15514e-06, 0.40792, 1)
+theme_override_fonts/font = ExtResource("3")
+theme_override_font_sizes/font_size = 48
+text = "Quit Game"
+
+[node name="MusicPlayer" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4")
+autoplay = true
+parameters/looping = true
+
+[node name="CreditsWindow" type="Window" parent="."]
+oversampling_override = 1.0
+title = "Credits"
+position = Vector2i(440, 260)
+size = Vector2i(400, 200)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CreditsWindow"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="CreditsWindow/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3")
+text = "Created by Xavier Randolph
+"
+
+[node name="CloseButton" type="Button" parent="CreditsWindow/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+theme_override_fonts/font = ExtResource("3")
+text = "Close"
+
+[connection signal="pressed" from="MenuContainer/MenuBox/StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="pressed" from="MenuContainer/MenuBox/CreditsButton" to="." method="_on_credits_button_pressed"]
+[connection signal="pressed" from="MenuContainer/MenuBox/QuitButton" to="." method="_on_quit_button_pressed"]
+[connection signal="pressed" from="CreditsWindow/VBoxContainer/CloseButton" to="." method="_on_close_button_pressed"]
